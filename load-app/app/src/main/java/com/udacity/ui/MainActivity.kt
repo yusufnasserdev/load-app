@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.databinding.DataBindingUtil
@@ -33,9 +34,12 @@ class MainActivity : AppCompatActivity() {
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
-        /*custom_button.setOnClickListener {
-            download()
-        }*/
+        binding.customButton.setOnClickListener {
+            Toast.makeText(applicationContext, "Clicked", Toast.LENGTH_SHORT).show()
+            binding.customButton.animationIsOver()
+
+            //download()
+        }
     }
 
     private val receiver = object : BroadcastReceiver() {

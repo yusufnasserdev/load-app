@@ -46,21 +46,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minHeight="48dp"
-                    android:text="@string/glide" />
+                    android:text="@string/glide"
+                    android:textSize="16sp" />
 
                 <RadioButton
                     android:id="@+id/repo_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minHeight="48dp"
-                    android:text="@string/repo" />
+                    android:text="@string/repo"
+                    android:textSize="16sp"
+                    />
 
                 <RadioButton
                     android:id="@+id/retrofit_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minHeight="48dp"
-                    android:text="@string/retrofit" />
+                    android:text="@string/retrofit"
+                    android:textSize="16sp" />
 
             </RadioGroup>
 
@@ -69,11 +73,15 @@
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_margin="20dp"
-                android:contentDescription="@string/loading_btn"
+                app:btnColor="@color/colorPrimary"
+                app:idleTxt="@string/download"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="RedundantDescriptionCheck" />
+                app:loadingColor1="@color/colorPrimaryDark"
+                app:loadingColor2="@color/colorAccent"
+                app:loadingTxt="@string/loading"
+                app:txtColor="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
