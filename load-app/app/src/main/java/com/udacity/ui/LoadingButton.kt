@@ -220,16 +220,16 @@ class LoadingButton @JvmOverloads constructor(
     private fun drawButtonLabel(canvas: Canvas?) {
         labelPaint.color = txtColor
 
-        btnText = if (btnState == ButtonState.IDLE)
-            idleText
-        else
+        btnText = if (btnState == ButtonState.LOADING)
             loadingText
-
-
-        val txtX = if (btnState == ButtonState.IDLE)
-            widthSize * 0.5f
         else
+            idleText
+
+
+        val txtX = if (btnState == ButtonState.LOADING)
             widthSize * 0.4f
+        else
+            widthSize * 0.5f
 
         val txtY = (heightSize / 2f) - ((labelPaint.descent() + labelPaint.ascent()) / 2f)
         canvas?.drawText(btnText, txtX, txtY, labelPaint)
