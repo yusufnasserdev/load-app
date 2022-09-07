@@ -3,7 +3,6 @@ package com.udacity.ui
 import android.app.DownloadManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -14,7 +13,6 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.udacity.R
 import com.udacity.util.sendNotification
@@ -102,8 +100,10 @@ class MainActivity : AppCompatActivity() {
 
                 // Checking if the downloadID exists
                 if (downloads.moveToFirst()) {
+                    val colIndex = downloads.getColumnIndex(DownloadManager.COLUMN_STATUS)
+                    val downloadStatus =  downloads.getInt(colIndex)
 
-                    when (downloads.getColumnIndex(DownloadManager.COLUMN_STATUS)) {
+                    when (downloadStatus) {
                         DownloadManager.STATUS_SUCCESSFUL -> {
                             val uriColumnIndex =
                                 downloads.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)
@@ -111,7 +111,6 @@ class MainActivity : AppCompatActivity() {
 
                             notificationManager.sendNotification(
                                 downloaded = true,
-                                uri = uri,
                                 downloadedFile = downloadedFile,
                                 context = context!!
                             )
@@ -119,7 +118,6 @@ class MainActivity : AppCompatActivity() {
                         DownloadManager.STATUS_FAILED -> {
                             notificationManager.sendNotification(
                                 downloaded = false,
-                                uri = "",
                                 downloadedFile = downloadedFile,
                                 context = context!!
                             )

@@ -11,7 +11,9 @@
     <string name="download_notification_channel_name" translatable="true">Download</string>
     <string name="download_channel_description">Downloaded files</string>
     <string name="download_failure" translatable="true">Error downloading the file</string>
-    <string name="notification_button">See download status</string>
+    <string name="notification_button">Details</string>
+    <string name="success">Success</string>
+    <string name="fail">Failure</string>
 
     <string name="button_name">Click me</string>
     <string name="button_loading">We are loading </string>
@@ -22,4 +24,9 @@
     <string name="loading_btn">A button to request the download and represent the progress</string>
     <string name="loading">Loading…</string>
     <string name="download">Download</string>
+    <string name="fab_description">Returns to the main activity</string>
+    <string name="file_name_label">File name:</string>
+    <string name="status_label">Status:</string>
+    <string name="swipe_up">Swipe Up</string>
+    <string name="download_img">Cloud download image to describe the sole purpose of the app</string>
 </resources>

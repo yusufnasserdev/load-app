@@ -17,8 +17,7 @@ import kotlin.math.min
 
 enum class ButtonState {
     IDLE,
-    LOADING,
-    COMPLETED
+    LOADING
 }
 
 class LoadingButton @JvmOverloads constructor(
@@ -63,6 +62,7 @@ class LoadingButton @JvmOverloads constructor(
     // Paint object for the circular progress shape
     private val progressArcPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
+    private var loaded = false
 
     // Init block for initializing attributes
     init {
@@ -161,7 +161,7 @@ class LoadingButton @JvmOverloads constructor(
         animator.doOnRepeat {
             Timber.i("doOnRepeat")
             if (loadingIsDone()) {
-                it.end()
+                it.cancel()
                 btnState = ButtonState.IDLE
                 resetProgress()
                 invalidate()
@@ -178,13 +178,11 @@ class LoadingButton @JvmOverloads constructor(
     private fun resetProgress() { progress = 0f }
 
     private fun loadingIsDone() : Boolean {
-        Timber.i("LoadingIsDone: $btnState" )
-        return btnState == ButtonState.COMPLETED
+        return loaded
     }
 
     fun animationIsOver() {
-        btnState = ButtonState.COMPLETED
-        Timber.i("animationIsOver: $btnState")
+        loaded = true
     }
 
     private fun drawButtonRect(canvas: Canvas?) {

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- A transition describes an animation via start and end state -->
+    <Transition
+        app:autoTransition="animateToEnd"
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="3000">
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/file_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="32dp"
+            android:alpha="0.0"
+            android:text="@string/file_name_label"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/status_label" />
+        <Constraint
+            android:id="@id/status_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:alpha="0.0"
+            android:text="@string/status_label"
+            android:textSize="24sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/status_view"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/file_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="16dp"
+            android:alpha="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/file_label"
+            app:layout_constraintBottom_toTopOf="@id/status_view"
+            tools:text="@string/glide" />
+        <Constraint
+            android:id="@+id/status_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:alpha="0.0"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/status_label"
+            tools:text="Failure"
+            tools:textColor="@color/red" />
+    </ConstraintSet>
+
+    <!-- Constraints to apply at the end of the animation -->
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/file_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:alpha="1.0"
+            android:text="@string/file_name_label"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@id/status_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:alpha="1.0"
+            android:text="@string/status_label"
+            android:textSize="24sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/status_view"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/file_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:alpha="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/file_label"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/glide" />
+        <Constraint
+            android:id="@+id/status_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:alpha="1.0"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/status_label"
+            app:layout_constraintTop_toBottomOf="@+id/file_name"
+            tools:text="Failure"
+            tools:textColor="@color/red" />
+    </ConstraintSet>
+
+</MotionScene>

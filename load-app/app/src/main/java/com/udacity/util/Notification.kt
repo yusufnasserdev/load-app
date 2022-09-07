@@ -7,6 +7,8 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.udacity.R
 import com.udacity.ui.DetailActivity
 import com.udacity.ui.MainActivity
@@ -22,12 +24,10 @@ private const val FLAGS = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLA
  *
  * @param downloaded file download status
  * @param downloadedFile downloaded file name
- * @param uri file uri
  * @param context activity context.
  */
 fun NotificationManager.sendNotification(
     downloaded: Boolean,
-    uri: String,
     downloadedFile: String,
     context: Context
 ) {
@@ -46,7 +46,6 @@ fun NotificationManager.sendNotification(
     val detailIntent = Intent(context, DetailActivity::class.java).apply {
         putExtra("status", downloaded)
         putExtra("file", downloadedFile)
-        putExtra("uri", uri)
     }
 
     val detailPendingIntent = PendingIntent.getActivity(
@@ -62,16 +61,10 @@ fun NotificationManager.sendNotification(
     //determines if download is success or fail and sets variable attributes for the notification
     if (downloaded) {
         messageBody = context.getString(R.string.download_success)
-        statusImage = BitmapFactory.decodeResource(
-            context.resources,
-            R.drawable.ic_baseline_done_24
-        )
+        statusImage = ContextCompat.getDrawable(context, R.drawable.ic_baseline_done_24)?.toBitmap()!!
     } else {
         messageBody = context.getString(R.string.download_failure)
-        statusImage = BitmapFactory.decodeResource(
-            context.resources,
-            R.drawable.ic_baseline_error_24
-        )
+        statusImage = ContextCompat.getDrawable(context, R.drawable.ic_baseline_error_24)?.toBitmap()!!
     }
 
     val bigPicStyle = NotificationCompat.BigPictureStyle()
