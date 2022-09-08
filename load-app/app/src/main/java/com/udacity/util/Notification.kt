@@ -15,8 +15,8 @@ import com.udacity.ui.MainActivity
 
 
 // Notification ID.
-private const val NOTIFICATION_ID = 0
-private const val REQUEST_CODE = 0
+private const val NOTIFICATION_ID = 1942
+private const val REQUEST_CODE = 2001
 private const val FLAGS = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
 
 /**
@@ -61,14 +61,14 @@ fun NotificationManager.sendNotification(
     //determines if download is success or fail and sets variable attributes for the notification
     if (downloaded) {
         messageBody = context.getString(R.string.download_success)
-        statusImage = ContextCompat.getDrawable(context, R.drawable.ic_baseline_done_24)?.toBitmap()!!
+        //statusImage = ContextCompat.getDrawable(context, R.drawable.ic_baseline_done_24)?.toBitmap()!!
     } else {
         messageBody = context.getString(R.string.download_failure)
-        statusImage = ContextCompat.getDrawable(context, R.drawable.ic_baseline_error_24)?.toBitmap()!!
+        //statusImage = ContextCompat.getDrawable(context, R.drawable.ic_baseline_error_24)?.toBitmap()!!
     }
 
     val bigPicStyle = NotificationCompat.BigPictureStyle()
-        .bigPicture(statusImage)
+        //.bigPicture(statusImage)
         .bigLargeIcon(null)
 
     // Build the notification
@@ -83,8 +83,8 @@ fun NotificationManager.sendNotification(
         .setContentIntent(contentPendingIntent)
         .setAutoCancel(true)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
-        .setStyle(bigPicStyle)
-        .setLargeIcon(statusImage)
+        //.setStyle(bigPicStyle)
+        //.setLargeIcon(statusImage)
         .addAction(
             R.drawable.ic_baseline_insert_drive_file_24,
             context.getString(R.string.notification_button),
@@ -95,9 +95,10 @@ fun NotificationManager.sendNotification(
 }
 
 /**
- * Cancels all notifications.
+ * Cancels notification.
  *
  */
+
 fun NotificationManager.cancelNotifications() {
-    cancelAll()
+    cancel(NOTIFICATION_ID)
 }

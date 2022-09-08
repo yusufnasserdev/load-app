@@ -11,6 +11,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -65,10 +66,12 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Please select a file to download", Toast.LENGTH_SHORT)
                         .show()
                     custom_button.animationIsOver()
+                    return@setOnClickListener
                 }
             }
 
-            download(selectedURL)
+            if (URLUtil.isValidUrl(selectedURL))
+                download(selectedURL)
         }
     }
 
@@ -88,7 +91,6 @@ class MainActivity : AppCompatActivity() {
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            custom_button.animationIsOver()
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
 
             if (id == downloadID) {
@@ -101,14 +103,9 @@ class MainActivity : AppCompatActivity() {
                 // Checking if the downloadID exists
                 if (downloads.moveToFirst()) {
                     val colIndex = downloads.getColumnIndex(DownloadManager.COLUMN_STATUS)
-                    val downloadStatus =  downloads.getInt(colIndex)
 
-                    when (downloadStatus) {
+                    when (downloads.getInt(colIndex)) {
                         DownloadManager.STATUS_SUCCESSFUL -> {
-                            val uriColumnIndex =
-                                downloads.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)
-                            val uri = downloads.getString(uriColumnIndex)
-
                             notificationManager.sendNotification(
                                 downloaded = true,
                                 downloadedFile = downloadedFile,
@@ -129,10 +126,9 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(context, "Download Paused", Toast.LENGTH_SHORT).show()
                         }
                     }
-
                 }
-
             }
+            custom_button.animationIsOver()
         }
     }
 

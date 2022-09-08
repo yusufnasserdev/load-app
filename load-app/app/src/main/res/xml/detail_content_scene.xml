@@ -9,7 +9,7 @@
         app:autoTransition="animateToEnd"
         app:constraintSetEnd="@+id/end"
         app:constraintSetStart="@+id/start"
-        app:duration="3000">
+        app:duration="2000">
 
     </Transition>
 

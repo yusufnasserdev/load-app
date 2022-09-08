@@ -47,9 +47,6 @@ class LoadingButton @JvmOverloads constructor(
     // Float variable holding the percentage animation progress of the download
     private var progress = 0f
 
-    // position variable which will be used to draw label and indicator circle position
-    private val pointPosition: PointF = PointF(0.0f, 0.0f)
-
     // Paint object for the button color
     private val btnPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
@@ -62,6 +59,7 @@ class LoadingButton @JvmOverloads constructor(
     // Paint object for the circular progress shape
     private val progressArcPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
+    // Indicates whether if the loading is done or not
     private var loaded = false
 
     // Init block for initializing attributes
