@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     Toast.makeText(this, "Please select a file to download", Toast.LENGTH_SHORT)
                         .show()
-                    custom_button.animationIsOver()
+                    custom_button.doneLoading()
                     return@setOnClickListener
                 }
             }
@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-            custom_button.animationIsOver()
+            custom_button.doneLoading()
         }
     }
 

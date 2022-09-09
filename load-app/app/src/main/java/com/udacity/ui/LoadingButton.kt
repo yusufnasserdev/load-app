@@ -59,8 +59,8 @@ class LoadingButton @JvmOverloads constructor(
     // Paint object for the circular progress shape
     private val progressArcPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-    // Indicates whether if the loading is done or not
-    private var loaded = false
+    // Value Animator
+    private val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
 
     // Init block for initializing attributes
     init {
@@ -102,6 +102,27 @@ class LoadingButton @JvmOverloads constructor(
             }
 
         }
+
+        valueAnimator
+            .apply {
+
+                duration = 3000
+                repeatCount = ValueAnimator.INFINITE
+
+                addUpdateListener {
+                    progress = it.animatedValue as Float
+
+                    if (progressIsDone())
+                        resetProgress()
+
+                    invalidate()
+                }
+
+                doOnEnd {
+                    isClickable = true
+                }
+
+            }
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -137,50 +158,23 @@ class LoadingButton @JvmOverloads constructor(
         isClickable = false
         Timber.i("Clicked")
         btnState = ButtonState.LOADING
-        startLoadingAnimation()
+        valueAnimator.start()
         return true
     }
 
-    private fun startLoadingAnimation() {
-        val animator = ValueAnimator.ofFloat(0f, 1f)
-        animator.duration = 3400
-        animator.addUpdateListener {
-            progress = it.animatedValue as Float
-
-            if (progressIsDone())
-                resetProgress()
-
-            invalidate()
-        }
-
-        animator.repeatCount = ValueAnimator.INFINITE
-        animator.start()
-
-        animator.doOnRepeat {
-            Timber.i("doOnRepeat")
-            if (loadingIsDone()) {
-                it.cancel()
-                btnState = ButtonState.IDLE
-                resetProgress()
-                invalidate()
-            }
-        }
-
-        animator.doOnEnd {
-            isClickable = true
-        }
+    private fun progressIsDone(): Boolean {
+        return progress == 1f
     }
 
-    private fun progressIsDone() : Boolean { return progress == 1f }
-
-    private fun resetProgress() { progress = 0f }
-
-    private fun loadingIsDone() : Boolean {
-        return loaded
+    private fun resetProgress() {
+        progress = 0f
     }
 
-    fun animationIsOver() {
-        loaded = true
+    fun doneLoading() {
+        valueAnimator.cancel()
+        btnState = ButtonState.IDLE
+        resetProgress()
+        invalidate()
     }
 
     private fun drawButtonRect(canvas: Canvas?) {
