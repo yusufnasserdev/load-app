@@ -33,8 +33,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
-
         notificationManager = ContextCompat.getSystemService(
             this,
             NotificationManager::class.java
@@ -161,8 +159,13 @@ class MainActivity : AppCompatActivity() {
             "https://github.com/square/retrofit/archive/master.zip"
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStart() {
+        super.onStart()
+        registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+    }
+
+    override fun onStop() {
+        super.onStop()
         unregisterReceiver(receiver)
     }
 }
