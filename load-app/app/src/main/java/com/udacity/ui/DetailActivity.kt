@@ -2,37 +2,40 @@ package com.udacity.ui
 
 import android.app.NotificationManager
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.udacity.R
+import com.udacity.databinding.ActivityDetailBinding
 import com.udacity.util.cancelNotifications
-import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.content_detail.*
 
 class DetailActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
-        setSupportActionBar(toolbar)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
+        setSupportActionBar(binding.toolbar)
+
         val notificationManager = getSystemService(NotificationManager::class.java)
         notificationManager.cancelNotifications()
 
         val downloadedFile = intent.getStringExtra("file")
         val downloaded = intent.getBooleanExtra("status", false)
 
-        file_name.text = downloadedFile
+        binding.fileName.text = downloadedFile
 
         if (downloaded) {
-            status_view.text = getString(R.string.success)
-            status_view.setTextColor(getColor(R.color.green))
+            binding.statusView.text = getString(R.string.success)
+            binding.statusView.setTextColor(getColor(R.color.green))
         } else {
-            status_view.text = getString(R.string.fail)
-            status_view.setTextColor(getColor(R.color.red))
+            binding.statusView.text = getString(R.string.fail)
+            binding.statusView.setTextColor(getColor(R.color.red))
         }
 
-        fab.setOnClickListener {
+        binding.fab.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
 

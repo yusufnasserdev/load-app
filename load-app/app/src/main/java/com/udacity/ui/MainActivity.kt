@@ -15,10 +15,10 @@ import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import com.udacity.R
+import com.udacity.databinding.ActivityMainBinding
 import com.udacity.util.sendNotification
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,11 +27,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var notificationManager: NotificationManager
     private lateinit var downloadedFile: String
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setSupportActionBar(binding.toolbar)
 
         notificationManager = ContextCompat.getSystemService(
             this,
@@ -43,11 +44,11 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.download_notification_channel_name)
         )
 
-        custom_button.setOnClickListener {
+        binding.customButton.setOnClickListener {
 
-            var selectedURL = ""
+            val selectedURL: String
 
-            when (radio_group.checkedRadioButtonId) {
+            when (binding.radioGroup.checkedRadioButtonId) {
                 R.id.glide_button -> {
                     downloadedFile = getString(R.string.glide)
                     selectedURL = GLIDE_URL
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     Toast.makeText(this, "Please select a file to download", Toast.LENGTH_SHORT)
                         .show()
-                    custom_button.doneLoading()
+                    binding.customButton.doneLoading()
                     return@setOnClickListener
                 }
             }
@@ -126,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-            custom_button.doneLoading()
+            binding.customButton.doneLoading()
         }
     }
 
