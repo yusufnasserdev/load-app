@@ -26,6 +26,7 @@ private const val FLAGS = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLA
  * @param downloadedFile downloaded file name
  * @param context activity context.
  */
+
 fun NotificationManager.sendNotification(
     downloaded: Boolean,
     downloadedFile: String,
@@ -96,7 +97,6 @@ fun NotificationManager.sendNotification(
 
 /**
  * Cancels notification.
- *
  */
 
 fun NotificationManager.cancelNotifications() {

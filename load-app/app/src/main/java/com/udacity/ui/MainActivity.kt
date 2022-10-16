@@ -29,6 +29,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var downloadedFile: String
     private lateinit var binding: ActivityMainBinding
 
+    companion object {
+        private const val REPO_URL =
+            "https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"
+        private const val GLIDE_URL =
+            "https://github.com/bumptech/glide/archive/master.zip"
+        private const val RETROFIT_URL =
+            "https://github.com/square/retrofit/archive/master.zip"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -149,15 +158,6 @@ class MainActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(notificationChannel)
 
         }
-    }
-
-    companion object {
-        private const val REPO_URL =
-            "https://github.com/udacity/nd940-c3-advanced-android-programming-project-starter/archive/master.zip"
-        private const val GLIDE_URL =
-            "https://github.com/bumptech/glide/archive/master.zip"
-        private const val RETROFIT_URL =
-            "https://github.com/square/retrofit/archive/master.zip"
     }
 
     override fun onStart() {

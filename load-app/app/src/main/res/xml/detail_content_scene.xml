@@ -15,6 +15,14 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
+            android:id="@+id/horizontal_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
+        />
+
+        <Constraint
             android:id="@+id/file_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -24,7 +32,8 @@
             android:text="@string/file_name_label"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/status_label" />
+            app:layout_constraintTop_toBottomOf="@id/horizontal_guideline" />
+
         <Constraint
             android:id="@id/status_label"
             android:layout_width="0dp"
@@ -40,12 +49,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="32dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
             android:alpha="0.0"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/file_label"
-            app:layout_constraintBottom_toTopOf="@id/status_view"
             tools:text="@string/glide" />
         <Constraint
             android:id="@+id/status_view"
